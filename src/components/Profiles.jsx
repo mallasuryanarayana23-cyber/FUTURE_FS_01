@@ -5,8 +5,8 @@ import { FaLinkedin } from 'react-icons/fa';
 const profiles = [
   { name: 'GitHub', icon: SiGithub, url: 'https://github.com/mallasuryanarayana23-cyber', color: '#ffffff', stats: '' },
   { name: 'LinkedIn', icon: FaLinkedin, url: 'https://www.linkedin.com/in/malla-surya-narayana-5520a9349', color: '#0a66c2', stats: '' },
-  { name: 'LeetCode', icon: SiLeetcode, url: '#', color: '#ffa116', stats: '100+ Problems' },
-  { name: 'CodeChef', icon: SiCodechef, url: '#', color: '#5B4638', stats: '1054 Rating' },
+  { name: 'LeetCode', icon: SiLeetcode, url: 'https://leetcode.com/u/suryamalla/', color: '#ffa116', stats: '100+ Problems' },
+  { name: 'CodeChef', icon: SiCodechef, url: 'https://www.codechef.com/users/surya189489', color: '#5B4638', stats: '1054 Rating' },
 ];
 
 const Profiles = () => {
