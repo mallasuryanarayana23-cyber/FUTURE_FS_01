@@ -1,53 +1,48 @@
-import { useEffect } from 'react';
-import Lenis from '@studio-freight/lenis';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Profiles from './components/Profiles';
-import Certifications from './components/Certifications';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import { useState } from 'react';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+import { AnimatePresence } from 'framer-motion';
+import LoadingScreen from './components/LoadingScreen';
+import MainLayout from './layouts/MainLayout';
+import Home from './pages/Home';
 
 function App() {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div className="relative w-full bg-background min-h-screen">
-      <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Profiles />
-      <Certifications />
-      <Contact />
-      <Footer />
-    </div>
+    <HelmetProvider>
+      <Helmet>
+        {/* SEO Head Specifications */}
+        <title>Malla Surya Narayana | Premium Full-Stack Portfolio</title>
+        <meta name="description" content="Explore the portfolio of Malla Surya Narayana, a computer science engineer specializing in premium React web apps, Node.js REST APIs, MongoDB pipelines, and C# ASP.NET services." />
+        <meta name="keywords" content="Malla Surya Narayana, Surya Narayana, Full Stack Developer, React.js, Node.js, Express, MongoDB, ASP.NET Core, C#, DSA, Web Design, Awwwards Portfolio" />
+        <meta name="theme-color" content="#030014" />
+        
+        {/* Open Graph / Social */}
+        <meta property="og:title" content="Malla Surya Narayana | Full-Stack Portfolio" />
+        <meta property="og:description" content="Discover premium interactive web apps, full-stack systems, and robust database architectures designed by Surya Narayana." />
+        <meta property="og:url" content="https://suryadev-portfolio.vercel.app" />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Malla Surya Narayana | Full-Stack Portfolio" />
+        <meta name="twitter:description" content="Discover premium interactive web apps, full-stack systems, and robust database architectures designed by Surya Narayana." />
+      </Helmet>
+
+      {/* Cinematic Preloader Coordination */}
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      {/* Main Visual Layout */}
+      {!isLoading && (
+        <MainLayout>
+          <Home />
+        </MainLayout>
+      )}
+    </HelmetProvider>
   );
 }
 

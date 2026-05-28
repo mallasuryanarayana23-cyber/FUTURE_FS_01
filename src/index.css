@@ -3,35 +3,63 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #09090b;
+  }
+  
   body {
-    @apply bg-background text-white antialiased overflow-x-hidden selection:bg-primary/30 selection:text-white;
+    @apply bg-background text-white antialiased selection:bg-zinc-800 selection:text-white font-sans;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
   }
 }
 
 @layer components {
+  /* High-end minimalist panel */
   .glass-panel {
-    @apply bg-secondary/30 backdrop-blur-md border border-white/10 shadow-2xl;
+    @apply bg-zinc-950/80 backdrop-blur-md border border-zinc-900 shadow-[0_4px_20px_rgba(0,0,0,0.3)];
   }
   
+  /* Advanced interactive hover-card with clean borders */
   .glass-card {
-    @apply bg-white/[0.02] backdrop-blur-lg border border-white/[0.05] hover:border-primary/50 transition-colors duration-300;
+    @apply bg-zinc-900/30 border border-zinc-800/40 transition-all duration-300 ease-out;
   }
 
+  .glass-card:hover {
+    @apply border-zinc-800 bg-zinc-900/60;
+    transform: translateY(-2px);
+  }
+
+  /* Sophisticated text gradients */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-cyanGlow to-accent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-100 to-zinc-400;
+  }
+
+  .text-gradient-pink {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-400;
+  }
+
+  /* Custom Glow Orbs (Disabled for minimalism) */
+  .glow-orb {
+    @apply hidden pointer-events-none;
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050816;
+  background: #030014;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e1e36;
-  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  border: 2px solid #030014;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #7c3aed;
@@ -52,4 +80,19 @@ html.lenis {
 }
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+/* 3D Tilt Card Helper */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Shimmer animation for preloading and placeholders */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
 }
